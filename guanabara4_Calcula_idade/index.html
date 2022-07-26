@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMULARIOS</title>
+</head>
+<body>
+<div>
+    <form action="idade.php" method="get">
+        Nome: <input type="text" name="nome" placeholder="Digite seu nome aqui"><br><br>
+        Ano de Nascimento: <input type="number" name="ano" placeholder="0000"><br><br>
+        <fieldset><legend>Sexo</legend>
+            <input type="radio" name="sexo" id="masc" value="Masculino" checked>
+            <label for="masc">Masculino</label><br>
+            <input type="radio" name="sexo" id="fem" value="Feminino">
+            <label for="fem">Feminino</label>
+        </fieldset><br>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+</body>
+</html>

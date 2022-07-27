@@ -1,0 +1,22 @@
+/* --- HISTORIA DO PHP --- */
+
+PHP(PHP hypertex processor)
+
+Na primeira versão ele apenas contava usuarios do site.
+
+Na segunda versão interpretava formularios
+
+A quarta versão teve 3 subversões dentro de sua vida
+
+
+/* --- COMO FUNCIONA O PHP --- */
+
+Dá funcionalidades adicionais ao html
+
+MODELOS DE CLIENTES
+
+TECNOLOGIA CLIENT-SIDE - Tecnologia do lado do cliente(font-and)
+Exenplos: HTML, CSS, JavaScript e flash.
+
+TECNOLOGIA SERVER SIDE - Tecnologia do lado do servidor(back-and)
+

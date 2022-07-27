@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raiz Quadrada</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-color: lightgray;
+            font-weight: bolder;
+        }
+
+        h1{
+            background-image: linear-gradient(to top, rgb(23, 15, 97), rgb(21, 40, 151));
+            color: white;
+            padding: 20px;
+        }
+
+        form{
+            padding: 10px;
+            line-height: 2em;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Curso de PHP para iniciantes</h1>
+    <form action="calc.php" method="get">
+        <p>
+            <label for="itext">Texto</label>
+            <input type="text" name="texto" id="itext">
+        </p>
+        <p>
+            <label for="itam">Tamanho da fonte</label>
+            <select name="tam" id="itam">
+                <option value="8pt">8</option>
+                <option value="10pt">10</option>
+                <option value="14pt">14</option>
+                <option value="20pt">20</option>
+                <option value="40pt">40</option>
+            </select>
+        </p>
+        <p>
+            <label for="icor">Cor</label>
+            <input type="color" name="cor" id="icor">
+        </p>
+        <p>
+            <input type="submit" value="Enviar">
+        </p>
+    </form>
+</body>
+</html>

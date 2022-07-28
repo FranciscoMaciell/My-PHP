@@ -7,6 +7,25 @@
     <title>Aula de PHP</title>
 </head>
 <body>
-    <form action="exer.php" method="get"></form>
+    <h1>PHP</h1>
+    <form action="exer.php" method="get">
+        <legend><h2>informe um numero e a opção se deseja cubo, quadrado ou raiz</h2></legend>
+        <p>
+            <label for="inum">Informe o numero</label>
+            <input type="number" name="num" id="inum" placeholder="digite aqui">
+        </p>
+        <fieldset>
+            <legend><h2>Escolha o tipo de operação</h2></legend>
+            <label for="idobro">Dobro</label>
+            <input type="radio" name="op" id="idobro" value="1">
+            <label for="iraiz">Raiz</label>
+            <input type="radio" name="op" id="iraiz" value="2">
+            <label for="icubo">Cubo</label>
+            <input type="radio" name="op" id="icubo" value="3">
+        </fieldset>
+        <p>
+            <input type="submit" value="Calcular">
+        </p>
+    </form>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-        require "funcoes1.php";
+        require "funcoes.php";
         echo "<h1>Testando novas funções</h1>";
         ola();
         mostraValor(4);

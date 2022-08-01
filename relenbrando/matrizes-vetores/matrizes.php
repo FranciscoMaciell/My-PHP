@@ -23,7 +23,7 @@
 
         $v=array("A", "J", "M", "X", "K");
         print_r($v);
-        */
+        
 
         $v=array("A", "J", "M", "X", "K");
         var_dump($v);
@@ -38,6 +38,10 @@
         var_dump($v);
 
         echo count($v);
+        */
+
+        
+        
     ?>
     </pre>
 </body>

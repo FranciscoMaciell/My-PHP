@@ -30,6 +30,16 @@
             echo "O campo $info possui o conteudo $info1<br>";
         }
         */
+        $id=array("nome"=>"Ana José", "idade"=>23, "Data de nascimento"=>1987);
+
+        foreach($id as $info1=>$info2){
+            echo "$info1 e $info2 <br>";
+        }
+        $id["fuma"]="True";
+
+        foreach($id as $info1=>$info2){
+            echo "<br>$info1 e $info2 <br>";
+        }
         
     ?>
 </body>

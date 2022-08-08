@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+form{
+    line-height: 1.5em;
+}
+
+.invalido{
+    border: 1px solid red;
+}
+

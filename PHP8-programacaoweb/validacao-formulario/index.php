@@ -1,106 +1,81 @@
 <?php
-    $erroNome="";
-    $erroEmail="";
-    $erroSenha="";
-    $erroRepeteSenha="";
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        //verifica se a variavel nome está vazia
-        if(empty($_POST['$nome'])){
-            $erroNome="Por favor preencha um nome";
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        // VERIFICA SE O POST NOME ESTÁ VAZIO
+        if(empty($_POST['nome'])){
+            $erroNome="Campo Nome Obrigatorio";
         }else{
-            //pega o valor vindo do post e limpa
-            $nome=limpaPost($_POST['nome']);
-
-            //Vai verificar se tem somente letras
-            if(!preg_match("/^[a-zA-Z-']*$/",$nome)){
-                $erroNome="Apenas aceitamos letras e espaços em branco";
+            // LIMPA O POST NOME
+            $nome=limpa_var($_POST['nome']);
+            // VERIFICA SE TEM SOMENTE LETRAS
+            if(!preg_match("/^[a-zA-Z-' ]*$/",$nome)){
+                $erroNome="Apenas letras e espaços em branco";
             }
         }
 
+        //VERIFICA SE O POST EMAIL ESTÁ VAZIO
         if(empty($_POST['email'])){
-            $erroEmail="Entre com um email valido";
+            $erroEmail="Campo Email Obrigatorio";
         }else{
-            $email=LimpaPost($_POST['email']);
+            $email=limpa_var($_POST['email']);
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $erroEmail="E-mail invalido";
+                $erroEmail="Email invalido";
             }
         }
 
-        if(empty($_POST['senha1'])){
-            $erroSenha1="Informe uma senha";
+        // VERRIFICA SE O CAMPO EMAIL ESTÁ VAZIO
+        if(empty($_POST['senha'])){
+            $erroSenha="Informe uma senha";
         }else{
-            $erroSenha=limpaPost($_POST['senha1']);
+            $senha=limpa_var($_POST['senha']);
             if(strlen($senha)<6){
-                $erroSenha="A senha precisa ter no minimo 6 caracteres";
-            }
-        }
-
-        if(empty($_POST['senha2'])){
-            $erroSenha2="Informe uma senha valida";
-            if($senha1!==$senha2){
-                $erroRepeteSenha="Confirmação de senha invalida";
-            }else{
-                $senha2=$_POST['senha2'];
+                $erroSenha="Senha invalida, minimo 6 caracteres";
             }
         }
     }
 
-    function limpaPost($valor){
+
+    function limpa_var($valor){
         $valor=trim($valor);
         $valor=stripslashes($valor);
         $valor=htmlspecialchars($valor);
         return $valor;
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>formulario-validação</title>
-    <style>
-        
-        
-
-    </style>
+    <title>Validação de formulário</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1><span>AULA PHP</span><br>Validação de formulario</h1>
-    <form method="post">
+    <h1><span>Aula PHP</span><br>Validação de Formulario</h1>
+    <form action="form.php" method="post">
 
-        <!-- nome completo -->
-        <p>
-            <label for="nome">Nome Completo</label><br>
-            <input type="text" name="nome" id="nome" placeholder="Digite seu nome"  <?php if(!empty($erroNome)){echo "class='invalido'";}?>>
-            <br><span class="erro"><?php echo $erroNome;?></span>
-        </p>
+        <!-- Nome Completo-->
+        <label for="inome">Nome Completo</label>
+        <br><input type="text" name="nome" id="inome" placeholder="Nome Completo" require>
+        <br><span class="erro"></span>
 
-        <!-- E-mail -->
-        <p>
-            <label for="email">E-mail</label><br>
-            <input type="email" name="email" id="email" placeholder="email@servidor.com"  <?php echo"class='invalido'";?>>
-            <br><span class="erro"><?php echo $erroEmail;?></span>
-        </p>
+        <!-- Email -->
+        <label for="email">E-mail</label>
+        <br><input type="email" name="email" id="email" placeholder="email" require>
+        <br><span class="erro"></span>
 
         <!-- Senha -->
-        <p>
-            <label for="senha1">Senha</label><br>
-            <input type="password" name="senha1" id="senha1" placeholder="Digite sua senha" >
-            <br><span class="erro"><?php echo $erroSenha;?></span>
-        </p>
+        <label for="id">Senha</label>
+        <br><input type="password" name="senha" id="id" placeholder="senha" require>
+        <br><span class="erro"></span>
 
-        <!-- Repetir senha -->
-        <p>
-            <label for="senha1">Senha</label><br>
-            <input type="password" name="senha2" id="senha1" placeholder="Digite sua senha" >
-            <br><span class="erro"><?php echo $erroRepeteSenha;?></span>
-        </p>
+        <!-- Repete Senha -->
+        <label for="id">Repetir Senha</label>
+        <br><input type="password" name="repeteSenha" id="id" placeholder="Repetir senha" require>
+        <br><span class="erro"></span>
 
-        <!-- botão enviar -->
-        <input type="submit" value="Enviar" class="botao">
-
+        <!-- Enviar Formulario -->
+        <button type="submit">Enviar</button>
     </form>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
     // MANIPULAÇÃO DE PASTAS
-
+    /*
     $pasta="arquivos/";
    
     //COMANDO PARA CRIAR PASTAS
-
+    
     if(!is_dir($pasta)){
         mkdir($pasta, 0755);
     }
@@ -18,7 +18,7 @@
 
     // FUNÇÕES PARA MANIPULAÇÃO DE ARQUIVOS
 
-    /*
+    
     fopen() - Abrir e criar arquivos
     fwrite() - Escrever no arquivo
     fclose() - Fechar o arquivo
@@ -31,35 +31,61 @@
     scandir() - lista tudo que tiver dentro da pasta
     */
 
-    $nome_arquivo=date('y-m-d-H-i-s')."txt";
-    $arquivo=fopen($pasta.$nome_arquivo, "a+");
-    fwrite($arquivo, "Ijetando texto 1 com PHP". PHP_EOL);
-    fwrite($arquivo, "Ijetando texto 2 com PHP". PHP_EOL);
-    fwrite($arquivo, "Ijetando texto 3 com PHP". PHP_EOL);
+    // CRIA A VARIAVEL COM O NOME DA PASTA
+    $pasta="arquivos/";
 
+    // TESTA SE EXISTE O DIRETORIO/ SE NÃO EXISTE CRIA
+    if(!is_dir($pasta)){
+        mkdir($pasta);
+    }
+
+    // CRIA O NOME DO ARQUIVO
+    $nomeArquivo=date('y-m-d-H-i-s').".txt";
+
+    // CRIA O ARQUIVO
+    $arquivo=fopen($pasta.$nomeArquivo, 'c+');
+
+    // FAZ A ESCRITA NO ARQUIVO
+    fwrite($arquivo, "Ijetando conteudo 1".PHP_EOL);
+    fwrite($arquivo, "Ijetando conteudo 2".PHP_EOL);
+    fwrite($arquivo, "Ijetando conteudo 3".PHP_EOL);
+
+    // FECHA O ARQUIVO
     fclose($arquivo);
 
-    // LER SE UM ARQUIVO EXISTE
+    $caminho=$pasta.$nomeArquivo;
 
-    $caminhoArquivo=$pasta.$nome_arquivo;
-
-    if(file_exists($caminhoArquivo)&&is_file($caminhoArquivo)){
-        /*$abrirArquivo=fopen($caminhoArquivo, "r");
+    // TESTA SE O ARQUIVO EXISTE E SE É UM ARQUIVO
+    if(file_exists($caminho)&&is_file($caminho)){
+        /*
+        // COM A FUNÇÃO FILE_GET_CONTENTS NÃO É PRECISO ABRIR E NEM FECHAR O ARQUIVO
+        echo file_get_contents($caminho);
+        */
+        $abrirArquivo=fopen($caminho, 'r');
         while(!feof($abrirArquivo)){
             echo fgets($abrirArquivo)."<br>";
         }
+        fclose($abrirArquivo);
 
-        echo file_get_contents($caminhoArquivo)."<br>";
-        */
+        // DELETA PASTA COM ARQUIVOS 
         if(is_dir($pasta)){
-            foreach(scandir($pasta) as $arquivo){
-                $caminho=$pasta.$arquivo;
+            foreach(scandir($pasta) as $arq){
+                $caminho=$pasta.$arq;
                 if(is_file($caminho)){
                     unlink($caminho);
                 }
             }
             rmdir($pasta);
         }
-        
     }
+
+    // FAZ COPIA DO ARQUIVO
+    $arquivo=fopen("texte.txt", 'a+');
+    fwrite($arquivo, "Ijetando conteudo 1".PHP_EOL);
+    fwrite($arquivo, "Ijetando conteudo 2".PHP_EOL);
+    fwrite($arquivo, "Ijetando conteudo 3".PHP_EOL);
+    fclose($arquivo);
+
+    copy('texte.txt', 'teste2.txt');
+
 ?>

@@ -14,35 +14,56 @@
     <div class="conteiner">
         <form method="post" enctype="multipart/form-data" class="m-5">
             <div class="input-group">
-                <input type="file" class="form-control" id="arquivo" name="arquivo" aria-describedby="arquivo" aria-label="Upload" require>
+                <input type="file" class="form-control" id="arquivo" name="arquivo[]" multiple aria-describedby="arquivo" aria-label="Upload" require>
                 <button class="btn btn-primary" type="submit" id="enviar" name="enviar">Enviar</button>
             </div>
         </form>
     </div>
 
     <?php
-        if(isset($_POST['enviar'])){
-            $tam_max=2097152;
-            $permitido=array("jpg", "jpeg", "mpeg", "mp4");
-            $extensao=pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
+        function reArrayFiles(&$file_post) {
+
+            $file_ary = array();
+            $file_count = count($file_post['name']);
+            $file_keys = array_keys($file_post);
+        
+            for ($i=0; $i<$file_count; $i++) {
+                foreach ($file_keys as $key) {
+                    $file_ary[$i][$key] = $file_post[$key][$i];
+                }
+            }
+        
+            return $file_ary;
         }
-        if($_FILES['arquivo']['size']>=$tam_max){
-            echo "ERRO: arquivo com tamanho não suportado";
-        }else{
-            if(in_array($extensao, $permitido)){
-                $pasta='imagens/';
-                if(!is_dir($pasta)){
-                    mkdir($pasta, 0755);
-                }
-                $tmp=$_FILES['arquivo']['tmp_name'];
-                $novoNome=$_FILES['arquivo']['name'];
-                if(move_uploaded_file($tmp, $pasta.$novoNome)){
-                    echo "Upload realizado com sucesso";
+
+        if(isset($_POST['enviar'])){
+            $arquivoArray=reArrayFiles($_FILES['arquivo']);
+
+            foreach($arquivoArray as $arquivo){
+                $tam_max=2097152;
+                $permitido=array("jpg", "jpeg", "mpeg", "mp4");
+                $extensao=pathinfo($arquivo['name'], PATHINFO_EXTENSION);
+
+                if($arquivo['size']>=$tam_max){
+                    echo "Tamanho do arquivo não suportado";
                 }else{
-                    echo "Falha no upload";
+                    if(in_array($extensao, $permitido)){
+                        $pasta='imagens/';
+                        if(!is_dir($pasta)){
+                            mkdir($pasta);
+                        }
+                        $tmp=$arquivo['tmp_name'];
+                        $novoNome=uniqid().".$extensao";
+
+                        if(move_uploaded_file($tmp, $pasta.$novoNome)){
+                            echo "Upload realizado com sucesso";
+                        }else{
+                            echo "Falha no upload";
+                        }
+                    }else{
+                        echo "extensao nao suportada";
+                    }
                 }
-            }else{
-                echo "Extensão não suportada";
             }
         }
     ?>
